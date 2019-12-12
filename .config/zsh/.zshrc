@@ -86,4 +86,4 @@ source $ZSH/oh-my-zsh.sh
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
-[ -z "$TMUX"  ] && { tmux attach || exec tmux new-session;}
+# [ -z "$TMUX"  ] && { tmux attach || exec tmux new-session;}
