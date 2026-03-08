@@ -1,0 +1,35 @@
+# Font
+font-family = "JetBrains Mono"
+font-size = 13
+
+# Theme
+theme = dark:GruvboxDark,light:GruvboxLight
+
+# Window
+window-padding-x = 8
+window-padding-y = 8
+macos-titlebar-style = hidden
+macos-option-as-alt = true
+
+# Shell
+shell-integration = zsh
+
+# Cursor
+cursor-style = block
+cursor-style-blink = false
+
+# Scrollback
+scrollback-limit = 100000
+
+# Bell
+bell = off
+
+# Use Ghostty natively for splits/tabs (replaces tmux for local work)
+# keybind = cmd+d=new_split:right
+# keybind = cmd+shift+d=new_split:down
+# keybind = cmd+w=close_surface
+# keybind = cmd+t=new_tab
+# keybind = cmd+h=goto_split:left
+# keybind = cmd+l=goto_split:right
+# keybind = cmd+j=goto_split:down
+# keybind = cmd+k=goto_split:up

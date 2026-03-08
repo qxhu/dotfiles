@@ -1,0 +1,6 @@
+{
+  "theme": "dark",
+  "autoUpdaterStatus": "enabled",
+  "preferredNotifChannel": "terminal",
+  "cleanupPeriodDays": 30
+}

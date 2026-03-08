@@ -1,0 +1,5 @@
+# zsh completion cache
+.config/zsh/.zcompdump*
+
+# macOS
+.DS_Store
