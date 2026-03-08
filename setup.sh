@@ -24,7 +24,7 @@ fi
 eval "$(/opt/homebrew/bin/brew shellenv 2>/dev/null || /usr/local/bin/brew shellenv)"
 
 info "Installing packages from Brewfile..."
-brew bundle --file="$DOTFILES/Brewfile" --no-lock
+brew bundle --file="$DOTFILES/Brewfile"
 
 # ── Symlinks ──────────────────────────────────────────────────────────────────
 link() {
