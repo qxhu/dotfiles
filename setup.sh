@@ -76,9 +76,10 @@ if [ "$SHELL" != "$BREW_ZSH" ]; then
 fi
 
 # ── Oh My Zsh ─────────────────────────────────────────────────────────────────
-if [ ! -d "$HOME/.oh-my-zsh" ]; then
+OMZ_DIR="${XDG_CONFIG_HOME:-$HOME/.config}/zsh/ohmyzsh"
+if [ ! -d "$OMZ_DIR" ]; then
   info "Installing oh-my-zsh..."
-  RUNZSH=no CHSH=no sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+  ZSH="$OMZ_DIR" RUNZSH=no CHSH=no sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
   # Restore symlink that oh-my-zsh installer overwrites
   ln -sf "$DOTFILES/.config/zsh/.zshrc" "$HOME/.config/zsh/.zshrc"
 fi
