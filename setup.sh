@@ -75,6 +75,14 @@ if [ "$SHELL" != "$BREW_ZSH" ]; then
   chsh -s "$BREW_ZSH"
 fi
 
+# ── Oh My Zsh ─────────────────────────────────────────────────────────────────
+if [ ! -d "$HOME/.oh-my-zsh" ]; then
+  info "Installing oh-my-zsh..."
+  RUNZSH=no CHSH=no sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+  # Restore symlink that oh-my-zsh installer overwrites
+  ln -sf "$DOTFILES/.config/zsh/.zshrc" "$HOME/.config/zsh/.zshrc"
+fi
+
 # ── Tmux Plugin Manager ───────────────────────────────────────────────────────
 if [ ! -d "$HOME/.tmux/plugins/tpm" ]; then
   info "Installing tmux plugin manager..."
