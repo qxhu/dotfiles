@@ -3,7 +3,7 @@ font-family = "JetBrains Mono"
 font-size = 13
 
 # Theme
-theme = dark:GruvboxDark,light:GruvboxLight
+theme = dark:Gruvbox Dark,light:Gruvbox Light
 
 # Window
 window-padding-x = 8
@@ -20,9 +20,6 @@ cursor-style-blink = false
 
 # Scrollback
 scrollback-limit = 100000
-
-# Bell
-bell = off
 
 # Use Ghostty natively for splits/tabs (replaces tmux for local work)
 # keybind = cmd+d=new_split:right

@@ -15,5 +15,8 @@ brew "node"
 # Ghostty terminal
 cask "ghostty"
 
+# Launcher
+cask "raycast"
+
 # Sync non-CLI app configs
 brew "mackup"
