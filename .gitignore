@@ -3,3 +3,12 @@
 
 # macOS
 .DS_Store
+
+# SSH — track only config, never keys
+.ssh/*
+!.ssh/config
+
+# Git local config with personal data — created by setup.sh, never tracked
+.config/git/local
+.config/git/littleist
+.config/git/qxhu

@@ -1,0 +1,21 @@
+# Personal data (name, default email) lives in ~/.config/git/local — not tracked.
+# That file is created by setup.sh on first run.
+[include]
+	path = ~/.config/git/local
+
+# Littleist identity — any repo whose remote URL contains "littleist/"
+[includeIf "hasconfig:remote.*.url:*littleist/*"]
+	path = ~/.config/git/littleist
+
+# qxhu identity — any repo whose remote URL contains "qxhu/"
+[includeIf "hasconfig:remote.*.url:*qxhu/*"]
+	path = ~/.config/git/qxhu
+
+[core]
+	excludesfile = ~/.config/git/ignore
+
+[pull]
+	rebase = true
+
+[init]
+	defaultBranch = main

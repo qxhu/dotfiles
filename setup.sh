@@ -26,6 +26,36 @@ eval "$(/opt/homebrew/bin/brew shellenv 2>/dev/null || /usr/local/bin/brew shell
 info "Installing packages from Brewfile..."
 brew bundle --file="$DOTFILES/Brewfile"
 
+# ── Git local config (sensitive — not tracked in dotfiles) ────────────────────
+GIT_LOCAL="$HOME/.config/git/local"
+GIT_LITTLEIST="$HOME/.config/git/littleist"
+GIT_QXHU="$HOME/.config/git/qxhu"
+mkdir -p "$HOME/.config/git"
+
+if [ ! -f "$GIT_LOCAL" ]; then
+  info "Creating ~/.config/git/local (not tracked in dotfiles)..."
+  read -rp "  Your full name: " git_name
+  read -rp "  Default email (used when no profile matches): " git_email
+  printf '[user]\n\tname = %s\n\temail = %s\n' "$git_name" "$git_email" > "$GIT_LOCAL"
+  success "  Created $GIT_LOCAL"
+fi
+
+if [ ! -f "$GIT_LITTLEIST" ]; then
+  read -rp "  Email for littleist profile: " littleist_email
+  printf '[user]\n\temail = %s\n' "$littleist_email" > "$GIT_LITTLEIST"
+  success "  Created $GIT_LITTLEIST"
+fi
+
+if [ ! -f "$GIT_QXHU" ]; then
+  read -rp "  Email for qxhu profile: " qxhu_email
+  printf '[user]\n\temail = %s\n' "$qxhu_email" > "$GIT_QXHU"
+  success "  Created $GIT_QXHU"
+fi
+
+# ── SSH config ────────────────────────────────────────────────────────────────
+mkdir -p "$HOME/.ssh"
+chmod 700 "$HOME/.ssh"
+
 # ── Symlinks ──────────────────────────────────────────────────────────────────
 link() {
   local src="$1" dst="$2"
@@ -39,6 +69,14 @@ link() {
 }
 
 info "Creating symlinks..."
+
+# Git
+link "$DOTFILES/.config/git/config"        "$HOME/.config/git/config"
+link "$DOTFILES/.config/git/ignore"        "$HOME/.config/git/ignore"
+
+# SSH config (keys themselves are never tracked)
+link "$DOTFILES/.ssh/config"               "$HOME/.ssh/config"
+chmod 600 "$HOME/.ssh/config"
 
 # Shell
 link "$DOTFILES/.zshenv"                    "$HOME/.zshenv"
@@ -104,5 +142,8 @@ fi
 echo ""
 success "Done! Next steps:"
 echo "  1. Restart your terminal"
-echo "  2. Run 'claude' to authenticate with Anthropic"
-echo "  3. In tmux, press prefix + I to install tmux plugins"
+echo "  2. Authenticate GitHub accounts:"
+echo "     gh auth login   # run twice, once per account (choose HTTPS)"
+echo "     gh auth setup-git  # configure git credential helper"
+echo "  3. Run 'claude' to authenticate with Anthropic"
+echo "  4. In tmux, press prefix + I to install tmux plugins"
