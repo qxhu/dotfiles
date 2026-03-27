@@ -1,5 +1,6 @@
 # Core CLI
 brew "git"
+brew "gh"             # GitHub CLI (multi-account support)
 brew "zsh"
 brew "fzf"
 brew "ripgrep"
