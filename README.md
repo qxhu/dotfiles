@@ -50,7 +50,7 @@ setup.sh                    # Bootstrap script
 | Raycast | App launcher |
 | fzf + zoxide | Fuzzy find + smart `cd` |
 | ripgrep + bat + eza | Better grep, cat, ls |
-| Claude Code | AI coding assistant |
+| Claude Code | AI coding assistant (installed via brew cask) |
 | mackup | Sync non-CLI app configs |
 
 ## Non-tracked app configs

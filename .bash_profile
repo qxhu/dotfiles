@@ -1,12 +1,8 @@
-# Add Homebrew `/usr/local/bin` and User `~/bin` to the `$PATH`
-PATH=/usr/local/bin:$PATH
+# Add User ~/bin to PATH
 PATH=$HOME/bin:$PATH
 export PATH
-export GOPATH=$HOME/Development/gowork
 
-# Load the shell dotfiles, and then some:
-# * ~/.path can be used to extend `$PATH`.
-# * ~/.extra can be used for other settings you don’t want to commit.
+# Load optional local dotfiles (not tracked in repo)
 for file in ~/.{path,bash_prompt,exports,aliases,functions,extra}; do
   [ -r "$file" ] && source "$file"
 done
