@@ -1,6 +1,9 @@
 # zsh completion cache
 .config/zsh/.zcompdump*
 
+# Claude local permissions/state
+.claude/settings.local.json
+
 # macOS
 .DS_Store
 

@@ -1,14 +1,14 @@
-# CLAUDE.md
+# AGENTS.md
 
-This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
+This file provides guidance for AI coding agents working in this repository.
 
 ## Overview
 
-Personal dotfiles for macOS. Shell: zsh + oh-my-zsh. Terminal: Ghostty. Multiplexer: tmux (remote/SSH only). AI: Claude Code.
+Personal dotfiles for macOS. Shell: zsh + oh-my-zsh. Terminal: cmux. Multiplexer: tmux (remote/SSH only). AI tooling: Claude Code, Codex, and Paseo.
 
 ## Deployment
 
-Run `./setup.sh` on a new machine. It installs Homebrew, runs `brew bundle`, and symlinks all configs into place. No manual copying — everything is symlinked from this repo.
+Run `./setup.sh` on a new machine. It installs Homebrew, runs `brew bundle`, and symlinks all configs into place. No manual copying; everything is symlinked from this repo.
 
 ## File Layout
 
@@ -19,7 +19,7 @@ Run `./setup.sh` on a new machine. It installs Homebrew, runs `brew bundle`, and
 .tmux.conf                      # Tmux config (remote/SSH use only)
 .config/
   zsh/.zshrc                    # Main zsh config (oh-my-zsh, robbyrussell theme)
-  ghostty/config                # Ghostty terminal config
+  cmux/settings.json            # cmux terminal config
   claude/
     CLAUDE.md                   # Global Claude instructions (synced across machines)
     settings.json               # Claude Code preferences
@@ -37,7 +37,7 @@ setup.sh                        # Bootstrap script for new machines
 
 **Claude Code sync:** `.config/claude/` is symlinked into `~/.claude/`. The `commands/` dir holds shared skills/slash commands. Per-machine data (`~/.claude/projects/`, `~/.claude/statsig/`) is intentionally NOT tracked here.
 
-**Ghostty vs tmux:** Use Ghostty's native splits/tabs for local development. Keep tmux for remote SSH sessions where session persistence matters.
+**cmux vs tmux:** Use cmux for local development. Keep tmux for remote SSH sessions where session persistence matters.
 
 **Tmux prefix:** `C-f` (not default `C-b`). Vim hjkl for pane navigation. Plugins via tpm.
 

@@ -2,15 +2,25 @@
 export ZSH="${XDG_CONFIG_HOME:-$HOME/.config}/zsh/ohmyzsh"
 ZSH_THEME="robbyrussell"
 plugins=(git)
-source $ZSH/oh-my-zsh.sh
+if [[ -r "$ZSH/oh-my-zsh.sh" ]]; then
+  source "$ZSH/oh-my-zsh.sh"
+fi
 
 # fzf
-eval "$(fzf --zsh)"
+if command -v fzf >/dev/null 2>&1; then
+  eval "$(fzf --zsh)"
+fi
 
 # zoxide (smarter cd)
-eval "$(zoxide init zsh)"
+if command -v zoxide >/dev/null 2>&1; then
+  eval "$(zoxide init zsh)"
+fi
 
 # Aliases
-alias ls='eza --icons'
-alias ll='eza -la --icons'
-alias cat='bat --paging=never'
+if command -v eza >/dev/null 2>&1; then
+  alias ls='eza --icons'
+  alias ll='eza -la --icons'
+fi
+if command -v bat >/dev/null 2>&1; then
+  alias cat='bat --paging=never'
+fi

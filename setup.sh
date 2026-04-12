@@ -61,8 +61,14 @@ link() {
   local src="$1" dst="$2"
   mkdir -p "$(dirname "$dst")"
   if [ -e "$dst" ] && [ ! -L "$dst" ]; then
-    warn "Backing up $dst → ${dst}.bak"
-    mv "$dst" "${dst}.bak"
+    local backup="${dst}.bak.$(date +%Y%m%d%H%M%S)"
+    local n=1
+    while [ -e "$backup" ]; do
+      backup="${dst}.bak.$(date +%Y%m%d%H%M%S).$n"
+      n=$((n + 1))
+    done
+    warn "Backing up $dst → $backup"
+    mv "$dst" "$backup"
   fi
   ln -sf "$src" "$dst"
   info "  $dst → $src"

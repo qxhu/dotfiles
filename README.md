@@ -23,6 +23,7 @@ cd ~/projects/dotfiles
 ```
 .zshenv                     # Loaded first; XDG dirs and tool env vars
 .zprofile / .bash_profile   # PATH setup
+AGENTS.md                   # Repository guidance for AI coding agents
 .config/
   zsh/.zshrc                # oh-my-zsh config (robbyrussell theme)
   cmux/settings.json        # cmux terminal config
