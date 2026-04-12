@@ -19,6 +19,7 @@ brew "uv"
 # Terminal
 tap "manaflow-ai/cmux"
 cask "cmux"
+cask "zed"
 
 # AI coding agents
 cask "claude-code"
