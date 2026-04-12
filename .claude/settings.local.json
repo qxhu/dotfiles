@@ -1,9 +1,0 @@
-{
-  "permissions": {
-    "allow": [
-      "Bash(ghostty +show-config)",
-      "Read(//Users/qhu/.1password/**)",
-      "Read(//Users/qhu/**)"
-    ]
-  }
-}

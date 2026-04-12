@@ -1,8 +1,5 @@
 {
   "cleanupPeriodDays": 30,
-  "permissions": {
-    "defaultMode": "bypassPermissions"
-  },
   "extraKnownMarketplaces": {
     "cloudflare": {
       "source": {
@@ -13,6 +10,5 @@
   },
   "theme": "dark",
   "autoUpdaterStatus": "enabled",
-  "preferredNotifChannel": "terminal",
-  "skipDangerousModePermissionPrompt": true
+  "preferredNotifChannel": "terminal"
 }
