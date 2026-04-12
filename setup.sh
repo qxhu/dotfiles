@@ -128,10 +128,10 @@ if [ ! -d "$HOME/.tmux/plugins/tpm" ]; then
   git clone --depth=1 https://github.com/tmux-plugins/tpm "$HOME/.tmux/plugins/tpm"
 fi
 
-# ── Claude Code ───────────────────────────────────────────────────────────────
-if ! command -v claude &>/dev/null; then
-  info "Installing Claude Code..."
-  npm install -g @anthropic-ai/claude-code
+# ── Python (via uv) ───────────────────────────────────────────────────────────
+if command -v uv &>/dev/null; then
+  info "Installing default Python via uv..."
+  uv python install 3.13 --default
 fi
 
 # ── fzf shell integration ─────────────────────────────────────────────────────

@@ -10,12 +10,20 @@ brew "jq"           # JSON processor
 brew "zoxide"       # smarter cd
 brew "tmux"         # for remote/SSH sessions
 
-# Node (for Claude Code)
+# Node
 brew "node"
+
+# Python (managed via uv, not brew)
+brew "uv"
 
 # Terminal
 tap "manaflow-ai/cmux"
 cask "cmux"
+
+# AI coding agents
+cask "claude-code"
+cask "codex"
+cask "paseo"
 
 # Launcher
 cask "raycast"
