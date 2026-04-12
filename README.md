@@ -4,6 +4,14 @@ Personal macOS dotfiles. Shell: zsh + oh-my-zsh. Terminal: cmux. AI: Claude Code
 
 ## Bootstrap
 
+On a fresh Mac, git isn't available until Xcode CLI tools are installed. Open Terminal and run:
+
+```sh
+xcode-select --install
+```
+
+Wait for it to finish, then:
+
 ```sh
 git clone https://github.com/qxhu/dotfiles.git ~/projects/dotfiles
 cd ~/projects/dotfiles
