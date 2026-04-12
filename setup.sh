@@ -96,6 +96,9 @@ link "$DOTFILES/.tmux.conf"                 "$HOME/.tmux.conf"
 # cmux
 link "$DOTFILES/.config/cmux/settings.json"  "$HOME/.config/cmux/settings.json"
 
+# Zed
+link "$DOTFILES/.config/zed/settings.json"   "$HOME/.config/zed/settings.json"
+
 # Claude Code
 link "$DOTFILES/.config/claude/settings.json"  "$HOME/.claude/settings.json"
 link "$DOTFILES/.config/claude/CLAUDE.md"      "$HOME/.claude/CLAUDE.md"
