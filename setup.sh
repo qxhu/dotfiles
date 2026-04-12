@@ -27,30 +27,30 @@ info "Installing packages from Brewfile..."
 brew bundle --file="$DOTFILES/Brewfile"
 
 # ── Git local config (sensitive — not tracked in dotfiles) ────────────────────
-GIT_LOCAL="$HOME/.config/git/local"
-GIT_LITTLEIST="$HOME/.config/git/littleist"
-GIT_QXHU="$HOME/.config/git/qxhu"
 mkdir -p "$HOME/.config/git"
 
-if [ ! -f "$GIT_LOCAL" ]; then
+if [ ! -f "$HOME/.config/git/local" ]; then
   info "Creating ~/.config/git/local (not tracked in dotfiles)..."
   read -rp "  Your full name: " git_name
   read -rp "  Default email (used when no profile matches): " git_email
-  printf '[user]\n\tname = %s\n\temail = %s\n' "$git_name" "$git_email" > "$GIT_LOCAL"
-  success "  Created $GIT_LOCAL"
+  printf '[user]\n\tname = %s\n\temail = %s\n' "$git_name" "$git_email" > "$HOME/.config/git/local"
+  success "  Created ~/.config/git/local"
 fi
 
-if [ ! -f "$GIT_LITTLEIST" ]; then
-  read -rp "  Email for littleist profile: " littleist_email
-  printf '[user]\n\temail = %s\n' "$littleist_email" > "$GIT_LITTLEIST"
-  success "  Created $GIT_LITTLEIST"
-fi
-
-if [ ! -f "$GIT_QXHU" ]; then
-  read -rp "  Email for qxhu profile: " qxhu_email
-  printf '[user]\n\temail = %s\n' "$qxhu_email" > "$GIT_QXHU"
-  success "  Created $GIT_QXHU"
-fi
+# Additional git profiles (matched via includeIf in git/config)
+# Each profile file should contain [user] email = ...
+for profile in $(ls "$HOME/.config/git/" | grep -v -e '^local$' -e '^config$' -e '^ignore$'); do
+  : # already exists, skip
+done
+# Prompt for any profiles defined in git/config that don't exist yet
+for profile in $(grep -oP '(?<=path = ~/\.config/git/).*' "$HOME/.config/git/config" | grep -v -e '^local$' -e '^config$' -e '^ignore$'); do
+  git_profile_file="$HOME/.config/git/$profile"
+  if [ ! -f "$git_profile_file" ]; then
+    read -rp "  Email for '$profile' profile: " profile_email
+    printf '[user]\n\temail = %s\n' "$profile_email" > "$git_profile_file"
+    success "  Created ~/.config/git/$profile"
+  fi
+done
 
 # ── SSH config ────────────────────────────────────────────────────────────────
 mkdir -p "$HOME/.ssh"
@@ -138,11 +138,6 @@ fi
 if command -v uv &>/dev/null; then
   info "Installing default Python via uv..."
   uv python install 3.13 --default
-fi
-
-# ── fzf shell integration ─────────────────────────────────────────────────────
-if command -v fzf &>/dev/null; then
-  "$(brew --prefix)/opt/fzf/install" --key-bindings --completion --no-update-rc --no-bash --no-fish 2>/dev/null || true
 fi
 
 echo ""
