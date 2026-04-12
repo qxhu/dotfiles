@@ -13,8 +13,9 @@ brew "tmux"         # for remote/SSH sessions
 # Node (for Claude Code)
 brew "node"
 
-# Ghostty terminal
-cask "ghostty"
+# Terminal
+tap "manaflow-ai/cmux"
+cask "cmux"
 
 # Launcher
 cask "raycast"

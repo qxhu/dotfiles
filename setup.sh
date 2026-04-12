@@ -87,8 +87,8 @@ link "$DOTFILES/.config/zsh/.zshrc"         "$HOME/.config/zsh/.zshrc"
 # Tmux (kept for remote/SSH sessions)
 link "$DOTFILES/.tmux.conf"                 "$HOME/.tmux.conf"
 
-# Ghostty
-link "$DOTFILES/.config/ghostty/config"     "$HOME/.config/ghostty/config"
+# cmux
+link "$DOTFILES/.config/cmux/settings.json"  "$HOME/.config/cmux/settings.json"
 
 # Claude Code
 link "$DOTFILES/.config/claude/settings.json"  "$HOME/.claude/settings.json"
