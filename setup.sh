@@ -43,7 +43,7 @@ for profile in $(ls "$HOME/.config/git/" | grep -v -e '^local$' -e '^config$' -e
   : # already exists, skip
 done
 # Prompt for any profiles defined in git/config that don't exist yet
-for profile in $(grep -oP '(?<=path = ~/\.config/git/).*' "$HOME/.config/git/config" | grep -v -e '^local$' -e '^config$' -e '^ignore$'); do
+for profile in $(sed -n 's|.*path = ~/\.config/git/||p' "$HOME/.config/git/config" | grep -v -e '^local$' -e '^config$' -e '^ignore$'); do
   git_profile_file="$HOME/.config/git/$profile"
   if [ ! -f "$git_profile_file" ]; then
     read -rp "  Email for '$profile' profile: " profile_email
