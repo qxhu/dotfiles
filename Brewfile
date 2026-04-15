@@ -22,7 +22,7 @@ cask "cmux"
 cask "zed"
 
 # AI coding agents
-cask "claude-code"
+cask "claude-code@latest"
 cask "codex"
 cask "paseo"
 

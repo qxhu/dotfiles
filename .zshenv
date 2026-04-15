@@ -17,9 +17,6 @@ export PATH="$HOME/.local/bin:$PATH"
 export NODE_REPL_HISTORY="$XDG_DATA_HOME/node_repl_history"
 export NPM_CONFIG_USERCONFIG="$XDG_CONFIG_HOME/npm/npmrc"
 
-# bat
-export BAT_CONFIG_PATH="$XDG_CONFIG_HOME/bat/bat.conf"
-
 # Docker
 export DOCKER_CONFIG="$XDG_CONFIG_HOME/docker"
 
