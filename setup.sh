@@ -37,11 +37,6 @@ if [ ! -f "$HOME/.config/git/local" ]; then
   success "  Created ~/.config/git/local"
 fi
 
-# Additional git profiles (matched via includeIf in git/config)
-# Each profile file should contain [user] email = ...
-for profile in $(ls "$HOME/.config/git/" | grep -v -e '^local$' -e '^config$' -e '^ignore$'); do
-  : # already exists, skip
-done
 # Prompt for any profiles defined in git/config that don't exist yet
 for profile in $(sed -n 's|.*path = ~/\.config/git/||p' "$HOME/.config/git/config" | grep -v -e '^local$' -e '^config$' -e '^ignore$'); do
   git_profile_file="$HOME/.config/git/$profile"
@@ -86,7 +81,7 @@ chmod 600 "$HOME/.ssh/config"
 
 # Shell
 link "$DOTFILES/.zshenv"                    "$HOME/.zshenv"
-link "$DOTFILES/.zprofile"                  "$HOME/.zprofile"
+link "$DOTFILES/.config/zsh/.zprofile"      "$HOME/.config/zsh/.zprofile"
 link "$DOTFILES/.bash_profile"              "$HOME/.bash_profile"
 link "$DOTFILES/.config/zsh/.zshrc"         "$HOME/.config/zsh/.zshrc"
 
