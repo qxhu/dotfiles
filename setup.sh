@@ -87,6 +87,7 @@ chmod 600 "$HOME/.ssh/config"
 # Shell
 link "$DOTFILES/.zshenv"                    "$HOME/.zshenv"
 link "$DOTFILES/.zprofile"                  "$HOME/.zprofile"
+link "$DOTFILES/.config/zsh/.zprofile"      "$HOME/.config/zsh/.zprofile"
 link "$DOTFILES/.bash_profile"              "$HOME/.bash_profile"
 link "$DOTFILES/.config/zsh/.zshrc"         "$HOME/.config/zsh/.zshrc"
 
