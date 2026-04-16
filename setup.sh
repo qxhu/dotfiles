@@ -3,6 +3,16 @@ set -euo pipefail
 
 DOTFILES="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
+# ── Flags ─────────────────────────────────────────────────────────────────────
+SKIP_MACOS=false
+FORCE_MACOS=false
+for arg in "$@"; do
+  case "$arg" in
+    --skip-macos)  SKIP_MACOS=true ;;
+    --apply-macos) FORCE_MACOS=true ;;
+  esac
+done
+
 info()    { printf '\033[0;34m[setup]\033[0m %s\n' "$*"; }
 success() { printf '\033[0;32m[setup]\033[0m %s\n' "$*"; }
 warn()    { printf '\033[0;33m[setup]\033[0m %s\n' "$*"; }
@@ -85,6 +95,9 @@ link "$DOTFILES/.config/zsh/.zprofile"      "$HOME/.config/zsh/.zprofile"
 link "$DOTFILES/.bash_profile"              "$HOME/.bash_profile"
 link "$DOTFILES/.config/zsh/.zshrc"         "$HOME/.config/zsh/.zshrc"
 
+# Starship
+link "$DOTFILES/.config/starship.toml"      "$HOME/.config/starship.toml"
+
 # Tmux (kept for remote/SSH sessions)
 link "$DOTFILES/.tmux.conf"                 "$HOME/.tmux.conf"
 
@@ -95,9 +108,10 @@ link "$DOTFILES/.config/cmux/settings.json"  "$HOME/.config/cmux/settings.json"
 link "$DOTFILES/.config/zed/settings.json"   "$HOME/.config/zed/settings.json"
 
 # Claude Code
-link "$DOTFILES/.config/claude/settings.json"  "$HOME/.claude/settings.json"
-link "$DOTFILES/.config/claude/CLAUDE.md"      "$HOME/.claude/CLAUDE.md"
+link "$DOTFILES/.config/claude/settings.json"    "$HOME/.claude/settings.json"
+link "$DOTFILES/.config/claude/CLAUDE.md"        "$HOME/.claude/CLAUDE.md"
 link "$DOTFILES/.config/claude/keybindings.json" "$HOME/.claude/keybindings.json"
+link "$DOTFILES/.config/claude/statusline.sh"    "$HOME/.claude/statusline.sh"
 # Commands dir (shared skills/slash commands) — link contents, not the dir itself,
 # so Claude can still write per-machine data into ~/.claude/
 mkdir -p "$HOME/.claude/commands"
@@ -117,15 +131,6 @@ if [ "$SHELL" != "$BREW_ZSH" ]; then
   chsh -s "$BREW_ZSH"
 fi
 
-# ── Oh My Zsh ─────────────────────────────────────────────────────────────────
-OMZ_DIR="${XDG_CONFIG_HOME:-$HOME/.config}/zsh/ohmyzsh"
-if [ ! -d "$OMZ_DIR" ]; then
-  info "Installing oh-my-zsh..."
-  ZSH="$OMZ_DIR" RUNZSH=no CHSH=no sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
-  # Restore symlink that oh-my-zsh installer overwrites
-  ln -sf "$DOTFILES/.config/zsh/.zshrc" "$HOME/.config/zsh/.zshrc"
-fi
-
 # ── Tmux Plugin Manager ───────────────────────────────────────────────────────
 if [ ! -d "$HOME/.tmux/plugins/tpm" ]; then
   info "Installing tmux plugin manager..."
@@ -136,6 +141,17 @@ fi
 if command -v uv &>/dev/null; then
   info "Installing default Python via uv..."
   uv python install 3.13 --default
+fi
+
+# ── macOS defaults ────────────────────────────────────────────────────────────
+# Only run on first setup or when explicitly requested (--apply-macos),
+# since it restarts Finder/Dock which is disruptive on re-runs.
+_MACOS_STAMP="$HOME/.config/.macos_defaults_applied"
+if [ "$SKIP_MACOS" = false ] && { [ "$FORCE_MACOS" = true ] || [ ! -f "$_MACOS_STAMP" ]; }; then
+  "$DOTFILES/macos.sh"
+  touch "$_MACOS_STAMP"
+else
+  info "Skipping macOS defaults (already applied — use --apply-macos to re-run)"
 fi
 
 echo ""

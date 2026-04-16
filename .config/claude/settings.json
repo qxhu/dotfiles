@@ -14,5 +14,9 @@
   "theme": "dark",
   "autoUpdaterStatus": "enabled",
   "preferredNotifChannel": "terminal",
-  "skipDangerousModePermissionPrompt": true
+  "skipDangerousModePermissionPrompt": true,
+  "statusLine": {
+    "type": "command",
+    "command": "sh ~/.claude/statusline.sh"
+  }
 }
