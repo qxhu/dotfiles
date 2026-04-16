@@ -1,6 +1,6 @@
 # dotfiles
 
-Personal macOS dotfiles. Shell: zsh + oh-my-zsh. Terminal: cmux. AI: Claude Code.
+Personal macOS dotfiles. Shell: zsh + Starship. Terminal: cmux. AI: Claude Code.
 
 ## Bootstrap
 
@@ -24,7 +24,7 @@ cd ~/projects/dotfiles
 3. Prompt for git identities (per-profile)
 4. Symlink all configs into place
 5. Set Homebrew zsh as default shell
-6. Install oh-my-zsh, tmux plugin manager, Claude Code, fzf shell integration
+6. Install tmux plugin manager, uv-managed Python, fzf shell integration
 
 ## Layout
 
@@ -33,7 +33,7 @@ cd ~/projects/dotfiles
 .zprofile / .bash_profile   # PATH setup
 AGENTS.md                   # Repository guidance for AI coding agents
 .config/
-  zsh/.zshrc                # oh-my-zsh config (robbyrussell theme)
+  zsh/.zshrc                # zsh config (completions, history, plugins)
   cmux/settings.json        # cmux terminal config
   git/config                # Git config (multi-profile support)
   git/ignore                # Global gitignore
@@ -57,8 +57,13 @@ setup.sh                    # Bootstrap script
 | cmux | Terminal multiplexer for local dev |
 | tmux | Multiplexer for remote/SSH sessions only |
 | Raycast | App launcher |
+| Starship | Shell prompt |
 | fzf + zoxide | Fuzzy find + smart `cd` |
 | ripgrep + bat + eza | Better grep, cat, ls |
+| git-delta | Syntax-highlighted diffs |
+| zsh-autosuggestions | Fish-style inline history suggestions |
+| zsh-syntax-highlighting | Command coloring before you hit enter |
+| zsh-history-substring-search | `↑`/`↓` searches history by typed prefix |
 | Claude Code | AI coding assistant (installed via brew cask) |
 | mackup | Sync non-CLI app configs |
 
