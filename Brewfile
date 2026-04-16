@@ -1,33 +1,32 @@
-# Core CLI
+# ── Core ──────────────────────────────────────────────────────────────────────
 brew "git"
 brew "gh"             # GitHub CLI (multi-account support)
 brew "zsh"
 brew "fzf"
 brew "ripgrep"
-brew "bat"          # better cat
-brew "eza"          # better ls
-brew "jq"           # JSON processor
-brew "zoxide"       # smarter cd
-brew "tmux"         # for remote/SSH sessions
+brew "bat"            # better cat
+brew "eza"            # better ls
+brew "jq"             # JSON processor
+brew "zoxide"         # smarter cd
+brew "tmux"           # for remote/SSH sessions
+brew "git-delta"      # better diffs
+brew "starship"       # prompt
+brew "mackup"         # sync non-CLI app configs
 
-# Node
+# Launcher / menubar
+cask "raycast"
+cask "hiddenbar"
+
+# ── Development ───────────────────────────────────────────────────────────────
 brew "node"
+brew "uv"             # Python (manages virtualenvs and Python versions)
 
-# Python (managed via uv, not brew)
-brew "uv"
-
-# Terminal
+# Editors / terminal
 tap "manaflow-ai/cmux"
 cask "cmux"
 cask "zed"
 
-# AI coding agents
+# ── AI ────────────────────────────────────────────────────────────────────────
 cask "claude-code@latest"
 cask "codex"
 cask "paseo"
-
-# Launcher
-cask "raycast"
-
-# Sync non-CLI app configs
-brew "mackup"
