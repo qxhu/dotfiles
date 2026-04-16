@@ -10,7 +10,6 @@ brew "jq"             # JSON processor
 brew "zoxide"         # smarter cd
 brew "tmux"           # for remote/SSH sessions
 brew "git-delta"      # better diffs
-brew "starship"       # prompt
 brew "zsh-autosuggestions"
 brew "zsh-syntax-highlighting"
 brew "zsh-history-substring-search"
