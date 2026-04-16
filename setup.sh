@@ -60,6 +60,7 @@ done
 # ── SSH config ────────────────────────────────────────────────────────────────
 mkdir -p "$HOME/.ssh"
 chmod 700 "$HOME/.ssh"
+mkdir -p "$HOME/.local/share/zsh"   # zsh history (XDG)
 
 # ── Symlinks ──────────────────────────────────────────────────────────────────
 link() {
