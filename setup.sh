@@ -60,7 +60,6 @@ done
 # ── SSH config ────────────────────────────────────────────────────────────────
 mkdir -p "$HOME/.ssh"
 chmod 700 "$HOME/.ssh"
-mkdir -p "$HOME/.local/share/zsh"   # zsh history (XDG)
 
 # ── Symlinks ──────────────────────────────────────────────────────────────────
 link() {
@@ -96,9 +95,6 @@ link "$DOTFILES/.config/zsh/.zprofile"      "$HOME/.config/zsh/.zprofile"
 link "$DOTFILES/.bash_profile"              "$HOME/.bash_profile"
 link "$DOTFILES/.config/zsh/.zshrc"         "$HOME/.config/zsh/.zshrc"
 
-# Starship
-link "$DOTFILES/.config/starship.toml"      "$HOME/.config/starship.toml"
-
 # Tmux (kept for remote/SSH sessions)
 link "$DOTFILES/.tmux.conf"                 "$HOME/.tmux.conf"
 
@@ -130,6 +126,15 @@ fi
 if [ "$SHELL" != "$BREW_ZSH" ]; then
   info "Setting default shell to zsh..."
   chsh -s "$BREW_ZSH"
+fi
+
+# ── Oh My Zsh ─────────────────────────────────────────────────────────────────
+OMZ_DIR="${XDG_CONFIG_HOME:-$HOME/.config}/zsh/ohmyzsh"
+if [ ! -d "$OMZ_DIR" ]; then
+  info "Installing oh-my-zsh..."
+  ZSH="$OMZ_DIR" RUNZSH=no CHSH=no sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+  # Restore symlink that oh-my-zsh installer overwrites
+  ln -sf "$DOTFILES/.config/zsh/.zshrc" "$HOME/.config/zsh/.zshrc"
 fi
 
 # ── Tmux Plugin Manager ───────────────────────────────────────────────────────
