@@ -4,7 +4,7 @@ This file provides guidance for AI coding agents working in this repository.
 
 ## Overview
 
-Personal dotfiles for macOS. Shell: zsh + oh-my-zsh. Terminal: cmux. Multiplexer: tmux (remote/SSH only). AI tooling: Claude Code, Codex, and Paseo.
+Personal dotfiles for macOS. Shell: zsh + Starship. Terminal: cmux. Multiplexer: tmux (remote/SSH only). AI tooling: Claude Code, Codex, and Paseo.
 
 ## Deployment
 
@@ -18,7 +18,8 @@ Run `./setup.sh` on a new machine. It installs Homebrew, runs `brew bundle`, and
 .bash_profile                   # PATH setup; loads ~/.{path,exports,aliases,functions,extra}
 .tmux.conf                      # Tmux config (remote/SSH use only)
 .config/
-  zsh/.zshrc                    # Main zsh config (oh-my-zsh, robbyrussell theme)
+  zsh/.zshrc                    # Main zsh config (completions, history, Starship, plugins)
+  starship.toml                 # Starship prompt config
   cmux/settings.json            # cmux terminal config
   claude/
     CLAUDE.md                   # Global Claude instructions (synced across machines)
@@ -33,7 +34,7 @@ setup.sh                        # Bootstrap script for new machines
 
 ## Key Conventions
 
-**XDG compliance:** All tool config paths in `.zshenv` use `$XDG_CONFIG_HOME` (`~/.config`), `$XDG_DATA_HOME` (`~/.local/share`), etc. ZDOTDIR points to `.config/zsh/`.
+**XDG compliance:** All tool config paths in `.zshenv` use `$XDG_CONFIG_HOME` (`~/.config`), `$XDG_DATA_HOME` (`~/.local/share`), etc. ZDOTDIR points to `.config/zsh/`. Zsh history is stored at `~/.local/share/zsh/history`.
 
 **Claude Code sync:** `.config/claude/` is symlinked into `~/.claude/`. The `commands/` dir holds shared skills/slash commands. Per-machine data (`~/.claude/projects/`, `~/.claude/statsig/`) is intentionally NOT tracked here.
 
