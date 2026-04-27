@@ -3,6 +3,10 @@
   "permissions": {
     "defaultMode": "bypassPermissions"
   },
+  "statusLine": {
+    "type": "command",
+    "command": "sh ~/.claude/statusline.sh"
+  },
   "extraKnownMarketplaces": {
     "cloudflare": {
       "source": {
@@ -11,12 +15,10 @@
       }
     }
   },
-  "theme": "dark",
-  "autoUpdaterStatus": "enabled",
-  "preferredNotifChannel": "terminal",
+  "effortLevel": "xhigh",
   "skipDangerousModePermissionPrompt": true,
-  "statusLine": {
-    "type": "command",
-    "command": "sh ~/.claude/statusline.sh"
-  }
+  "theme": "dark",
+  "preferredNotifChannel": "auto",
+  "autoUpdaterStatus": "enabled",
+  "model": "haiku"
 }
