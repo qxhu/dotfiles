@@ -1,6 +1,6 @@
 # dotfiles
 
-Personal macOS dotfiles. Shell: zsh + Starship. Terminal: cmux. AI: Claude Code.
+Personal macOS dotfiles. Shell: zsh + Oh My Zsh. Terminal: cmux. AI: Claude Code.
 
 ## Bootstrap
 
@@ -57,7 +57,7 @@ setup.sh                    # Bootstrap script
 | cmux | Terminal multiplexer for local dev |
 | tmux | Multiplexer for remote/SSH sessions only |
 | Raycast | App launcher |
-| Starship | Shell prompt |
+| Oh My Zsh | Shell framework and prompt |
 | fzf + zoxide | Fuzzy find + smart `cd` |
 | ripgrep + bat + eza | Better grep, cat, ls |
 | git-delta | Syntax-highlighted diffs |

@@ -4,7 +4,7 @@ This file provides guidance for AI coding agents working in this repository.
 
 ## Overview
 
-Personal dotfiles for macOS. Shell: zsh + Starship. Terminal: cmux. Multiplexer: tmux (remote/SSH only). AI tooling: Claude Code, Codex, and Paseo.
+Personal dotfiles for macOS. Shell: zsh + Oh My Zsh. Terminal: cmux. Multiplexer: tmux (remote/SSH only). AI tooling: Claude Code, Codex, and Paseo.
 
 ## Deployment
 
@@ -18,8 +18,7 @@ Run `./setup.sh` on a new machine. It installs Homebrew, runs `brew bundle`, and
 .bash_profile                   # PATH setup; loads ~/.{path,exports,aliases,functions,extra}
 .tmux.conf                      # Tmux config (remote/SSH use only)
 .config/
-  zsh/.zshrc                    # Main zsh config (completions, history, Starship, plugins)
-  starship.toml                 # Starship prompt config
+  zsh/.zshrc                    # Main zsh config (completions, history, Oh My Zsh, plugins)
   cmux/settings.json            # cmux terminal config
   claude/
     CLAUDE.md                   # Global Claude instructions (synced across machines)

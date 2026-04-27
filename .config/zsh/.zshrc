@@ -6,6 +6,12 @@ if [[ -r "$ZSH/oh-my-zsh.sh" ]]; then
   source "$ZSH/oh-my-zsh.sh"
 fi
 
+# History
+mkdir -p "${XDG_DATA_HOME:-$HOME/.local/share}/zsh"
+HISTFILE="${XDG_DATA_HOME:-$HOME/.local/share}/zsh/history"
+HISTSIZE=50000
+SAVEHIST=50000
+
 # fzf
 if command -v fzf >/dev/null 2>&1; then
   eval "$(fzf --zsh)"

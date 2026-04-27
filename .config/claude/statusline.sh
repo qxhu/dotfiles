@@ -1,5 +1,5 @@
 #!/bin/sh
-# Claude Code status line — mirrors Starship config (dir + git + model)
+# Claude Code status line — mirrors shell prompt context (dir + git + model)
 input=$(cat)
 
 cwd=$(echo "$input" | jq -r '.workspace.current_dir // .cwd')
