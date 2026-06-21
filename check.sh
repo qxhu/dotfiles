@@ -65,10 +65,10 @@ EOF
 
 printf '\nChecking Git and GitHub...\n'
 checks=$((checks + 1))
-if git -C "$DOTFILES" var GIT_AUTHOR_IDENT 2>/dev/null | grep -q '^qxhu <qxhu@users\.noreply\.github\.com> '; then
+if git -C "$DOTFILES" var GIT_AUTHOR_IDENT 2>/dev/null | grep -q '^qxhu <67043+qxhu@users\.noreply\.github\.com> '; then
   pass "Git uses the qxhu no-reply identity"
 else
-  fail "Git is not using qxhu <qxhu@users.noreply.github.com>"
+  fail "Git is not using qxhu <67043+qxhu@users.noreply.github.com>"
 fi
 
 checks=$((checks + 1))

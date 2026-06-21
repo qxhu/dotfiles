@@ -1,6 +1,6 @@
 [user]
 	name = qxhu
-	email = qxhu@users.noreply.github.com
+	email = 67043+qxhu@users.noreply.github.com
 	signingKey = ~/.config/git/qxhu-signing.pub
 
 [gpg]
