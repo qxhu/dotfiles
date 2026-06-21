@@ -52,6 +52,8 @@ fi
 
 # Prompt for any profiles defined in git/config that don't exist yet
 for profile in $(sed -n 's|.*path = ~/\.config/git/||p' "$DOTFILES/.config/git/config" | grep -v -e '^local$' -e '^config$' -e '^ignore$'); do
+  # Profiles tracked in this repository are symlinked below and need no prompt.
+  [ -f "$DOTFILES/.config/git/$profile" ] && continue
   git_profile_file="$HOME/.config/git/$profile"
   if [ ! -f "$git_profile_file" ]; then
     read -rp "  Email for '$profile' profile: " profile_email
@@ -87,6 +89,7 @@ info "Creating symlinks..."
 # Git
 link "$DOTFILES/.config/git/config"        "$HOME/.config/git/config"
 link "$DOTFILES/.config/git/ignore"        "$HOME/.config/git/ignore"
+link "$DOTFILES/.config/git/qxhu"          "$HOME/.config/git/qxhu"
 
 # GitHub CLI (hosts.yml remains local authentication state)
 link "$DOTFILES/.config/gh/config.yml"      "$HOME/.config/gh/config.yml"

@@ -48,6 +48,7 @@ AGENTS.md                   # Repository guidance for AI coding agents
   cmux/settings.json        # cmux terminal config
   git/config                # Git config (multi-profile support)
   git/ignore                # Global gitignore
+  git/qxhu                  # Portable qxhu GitHub no-reply identity
   claude/
     CLAUDE.md               # Global Claude Code instructions
     settings.json           # Claude Code preferences

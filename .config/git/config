@@ -1,10 +1,17 @@
 # Personal data (name, default email) lives in ~/.config/git/local — not tracked.
 # That file is created by setup.sh on first run.
+[user]
+	useConfigOnly = true
+
 [include]
 	path = ~/.config/git/local
 
-# qxhu identity — any repo whose remote URL contains "qxhu/"
-[includeIf "hasconfig:remote.*.url:*qxhu/*"]
+# qxhu identity for GitHub HTTPS and SSH remotes
+[includeIf "hasconfig:remote.*.url:https://github.com/qxhu/**"]
+	path = ~/.config/git/qxhu
+[includeIf "hasconfig:remote.*.url:git@github.com:qxhu/**"]
+	path = ~/.config/git/qxhu
+[includeIf "hasconfig:remote.*.url:ssh://git@github.com/qxhu/**"]
 	path = ~/.config/git/qxhu
 
 [core]

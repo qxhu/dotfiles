@@ -13,7 +13,6 @@
 
 # Git local config with personal data — created by setup.sh, never tracked
 .config/git/local
-.config/git/qxhu
 
 # GitHub CLI authentication state
 .config/gh/hosts.yml
