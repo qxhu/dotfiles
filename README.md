@@ -44,11 +44,13 @@ and tmux plugins; and reapplies macOS defaults only when `macos.sh` changes.
 .zprofile / .bash_profile   # PATH setup
 AGENTS.md                   # Repository guidance for AI coding agents
 .config/
+  1Password/ssh/agent.toml    # SSH keys exposed by the 1Password agent
   zsh/.zshrc                # zsh config (completions, history, plugins)
   cmux/settings.json        # cmux terminal config
   git/config                # Git config (multi-profile support)
   git/ignore                # Global gitignore
   git/qxhu                  # Portable qxhu GitHub no-reply identity
+  git/qxhu-signing.pub      # Public key used for verified commit signing
   claude/
     CLAUDE.md               # Global Claude Code instructions
     settings.json           # Claude Code preferences

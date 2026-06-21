@@ -90,6 +90,10 @@ info "Creating symlinks..."
 link "$DOTFILES/.config/git/config"        "$HOME/.config/git/config"
 link "$DOTFILES/.config/git/ignore"        "$HOME/.config/git/ignore"
 link "$DOTFILES/.config/git/qxhu"          "$HOME/.config/git/qxhu"
+link "$DOTFILES/.config/git/qxhu-signing.pub" "$HOME/.config/git/qxhu-signing.pub"
+
+# 1Password SSH agent (public item selectors only; no key material)
+link "$DOTFILES/.config/1Password/ssh/agent.toml" "$HOME/.config/1Password/ssh/agent.toml"
 
 # GitHub CLI (hosts.yml remains local authentication state)
 link "$DOTFILES/.config/gh/config.yml"      "$HOME/.config/gh/config.yml"

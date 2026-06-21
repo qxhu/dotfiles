@@ -1,0 +1,7 @@
+[[ssh-keys]]
+item = "qxhu"
+vault = "devenv"
+
+[[ssh-keys]]
+item = "servers"
+vault = "devenv"
