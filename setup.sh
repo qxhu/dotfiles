@@ -33,7 +33,10 @@ fi
 # Ensure brew is on PATH (handles both Apple Silicon and Intel)
 eval "$(/opt/homebrew/bin/brew shellenv 2>/dev/null || /usr/local/bin/brew shellenv)"
 
-info "Installing packages from Brewfile..."
+info "Updating Homebrew..."
+brew update
+
+info "Installing and updating packages from Brewfile..."
 brew bundle --file="$DOTFILES/Brewfile"
 
 # ── Git local config (sensitive — not tracked in dotfiles) ────────────────────
@@ -133,29 +136,31 @@ fi
 
 # ── Oh My Zsh ─────────────────────────────────────────────────────────────────
 OMZ_DIR="${XDG_CONFIG_HOME:-$HOME/.config}/zsh/ohmyzsh"
-OMZ_COMMIT="df34d2b8d575777465aed8ae9b7cd90d63fdcd6e"
 if [ ! -d "$OMZ_DIR/.git" ]; then
   if [ -e "$OMZ_DIR" ]; then
     warn "$OMZ_DIR exists but is not a git checkout; move it aside and re-run setup"
     exit 1
   fi
   info "Installing Oh My Zsh..."
-  git clone --no-checkout https://github.com/ohmyzsh/ohmyzsh.git "$OMZ_DIR"
-fi
-if ! git -C "$OMZ_DIR" cat-file -e "${OMZ_COMMIT}^{commit}" 2>/dev/null; then
-  info "Fetching pinned Oh My Zsh revision..."
-  git -C "$OMZ_DIR" fetch --depth=1 origin "$OMZ_COMMIT"
-fi
-if [ "$(git -C "$OMZ_DIR" rev-parse HEAD)" != "$OMZ_COMMIT" ]; then
-  info "Updating Oh My Zsh to pinned revision..."
-  git -C "$OMZ_DIR" checkout --detach "$OMZ_COMMIT"
+  git clone https://github.com/ohmyzsh/ohmyzsh.git "$OMZ_DIR"
+else
+  info "Updating Oh My Zsh..."
+  git -C "$OMZ_DIR" fetch --prune origin
+  git -C "$OMZ_DIR" checkout master
+  git -C "$OMZ_DIR" merge --ff-only origin/master
 fi
 
 # ── Tmux Plugin Manager ───────────────────────────────────────────────────────
 if [ ! -d "$HOME/.tmux/plugins/tpm" ]; then
   info "Installing tmux plugin manager..."
   git clone --depth=1 https://github.com/tmux-plugins/tpm "$HOME/.tmux/plugins/tpm"
+else
+  info "Updating tmux plugin manager..."
+  git -C "$HOME/.tmux/plugins/tpm" pull --ff-only
 fi
+info "Installing and updating tmux plugins..."
+"$HOME/.tmux/plugins/tpm/bin/install_plugins"
+"$HOME/.tmux/plugins/tpm/bin/update_plugins" all
 
 # ── Python (via uv) ───────────────────────────────────────────────────────────
 if command -v uv &>/dev/null; then
@@ -182,4 +187,3 @@ echo "  2. Authenticate GitHub:"
 echo "     gh auth login"
 echo "     gh auth setup-git  # configure git credential helper"
 echo "  3. Run 'claude' to authenticate with Anthropic"
-echo "  4. In tmux, press prefix + I to install tmux plugins"

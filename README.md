@@ -26,8 +26,8 @@ git pull --ff-only
 ./setup.sh
 ```
 
-Re-running setup refreshes symlinks and packages, enforces the pinned Oh My Zsh
-revision, and reapplies macOS defaults only when `macos.sh` has changed.
+Re-running setup refreshes symlinks; updates Homebrew packages, Oh My Zsh, TPM,
+and tmux plugins; and reapplies macOS defaults only when `macos.sh` changes.
 
 `setup.sh` will:
 1. Install Xcode CLI tools (if missing)
@@ -92,4 +92,3 @@ mackup restore   # on a new machine
 1. Restart terminal
 2. Authenticate GitHub: `gh auth login`
 3. Run `claude` to authenticate with Anthropic
-4. In tmux: `prefix + I` to install plugins (`C-f` is the prefix)
