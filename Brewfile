@@ -31,4 +31,4 @@ cask "zed"
 # ── AI ────────────────────────────────────────────────────────────────────────
 cask "claude-code@latest"
 cask "codex"
-cask "paseo"
+cask "chatgpt"

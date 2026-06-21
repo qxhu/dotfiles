@@ -7,10 +7,6 @@
 [includeIf "hasconfig:remote.*.url:*qxhu/*"]
 	path = ~/.config/git/qxhu
 
-# qxhu identity — any repo whose remote URL contains "qxhu/"
-[includeIf "hasconfig:remote.*.url:*qxhu/*"]
-	path = ~/.config/git/qxhu
-
 [core]
 	excludesfile = ~/.config/git/ignore
 	pager = delta
