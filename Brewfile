@@ -13,6 +13,7 @@ brew "git-delta"      # better diffs
 brew "zsh-autosuggestions"
 brew "zsh-syntax-highlighting"
 brew "zsh-history-substring-search"
+brew "shellcheck"      # shell script validation
 brew "mackup"         # sync non-CLI app configs
 
 # Launcher / menubar
@@ -31,4 +32,3 @@ cask "zed"
 # ── AI ────────────────────────────────────────────────────────────────────────
 cask "claude-code@latest"
 cask "codex"
-cask "chatgpt"

@@ -6,12 +6,19 @@ DOTFILES="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 # ── Flags ─────────────────────────────────────────────────────────────────────
 SKIP_MACOS=false
 FORCE_MACOS=false
+CHECK_ONLY=false
 for arg in "$@"; do
   case "$arg" in
     --skip-macos)  SKIP_MACOS=true ;;
     --apply-macos) FORCE_MACOS=true ;;
+    --check)       CHECK_ONLY=true ;;
+    *) printf 'Unknown option: %s\n' "$arg" >&2; exit 2 ;;
   esac
 done
+
+if [ "$CHECK_ONLY" = true ]; then
+  exec "$DOTFILES/check.sh"
+fi
 
 info()    { printf '\033[0;34m[setup]\033[0m %s\n' "$*"; }
 success() { printf '\033[0;32m[setup]\033[0m %s\n' "$*"; }
@@ -42,6 +49,10 @@ if [ ! -d "/Applications/1Password.app" ]; then
   info "Installing 1Password..."
   brew install --cask 1password
 fi
+if [ ! -d "/Applications/ChatGPT.app" ]; then
+  info "Installing ChatGPT..."
+  brew install --cask chatgpt
+fi
 
 info "Installing and updating packages from Brewfile..."
 brew bundle --file="$DOTFILES/Brewfile"
@@ -58,7 +69,7 @@ if [ ! -f "$HOME/.config/git/local" ]; then
 fi
 
 # Prompt for any profiles defined in git/config that don't exist yet
-for profile in $(sed -n 's|.*path = ~/\.config/git/||p' "$DOTFILES/.config/git/config" | grep -v -e '^local$' -e '^config$' -e '^ignore$'); do
+while IFS= read -r profile; do
   # Profiles tracked in this repository are symlinked below and need no prompt.
   [ -f "$DOTFILES/.config/git/$profile" ] && continue
   git_profile_file="$HOME/.config/git/$profile"
@@ -67,7 +78,7 @@ for profile in $(sed -n 's|.*path = ~/\.config/git/||p' "$DOTFILES/.config/git/c
     printf '[user]\n\temail = %s\n' "$profile_email" > "$git_profile_file"
     success "  Created ~/.config/git/$profile"
   fi
-done
+done < <(sed -n 's|.*path = ~/\.config/git/||p' "$DOTFILES/.config/git/config" | grep -v -e '^local$' -e '^config$' -e '^ignore$')
 
 # ── SSH config ────────────────────────────────────────────────────────────────
 mkdir -p "$HOME/.ssh"
@@ -78,7 +89,8 @@ link() {
   local src="$1" dst="$2"
   mkdir -p "$(dirname "$dst")"
   if [ -e "$dst" ] && [ ! -L "$dst" ]; then
-    local backup="${dst}.bak.$(date +%Y%m%d%H%M%S)"
+    local backup
+    backup="${dst}.bak.$(date +%Y%m%d%H%M%S)"
     local n=1
     while [ -e "$backup" ]; do
       backup="${dst}.bak.$(date +%Y%m%d%H%M%S).$n"

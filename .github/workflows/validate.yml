@@ -1,0 +1,57 @@
+name: Validate
+
+on:
+  push:
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  config:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          fetch-depth: 2
+
+      - name: Install validators
+        run: sudo apt-get update && sudo apt-get install --yes jq shellcheck zsh
+
+      - name: Check shell syntax
+        run: |
+          bash -n setup.sh check.sh macos.sh .config/claude/statusline.sh .config/conf_docker.sh .config/conf_python.sh
+          zsh -n .zshenv .config/zsh/.zprofile .config/zsh/.zshrc
+
+      - name: Run ShellCheck
+        run: shellcheck setup.sh check.sh macos.sh .config/claude/statusline.sh .config/conf_docker.sh .config/conf_python.sh
+
+      - name: Parse JSON, JSONC, TOML, and YAML
+        run: |
+          jq empty .config/claude/settings.json .config/claude/keybindings.json .config/zed/settings.json
+          python3 - <<'PY'
+          import json
+          import re
+          import tomllib
+          from pathlib import Path
+
+          with Path('.config/1Password/ssh/agent.toml').open('rb') as file:
+              tomllib.load(file)
+
+          text = Path('.config/cmux/settings.json').read_text()
+          text = '\n'.join(line for line in text.splitlines() if not line.lstrip().startswith('//'))
+          text = re.sub(r',\s*([}\]])', r'\1', text)
+          json.loads(text)
+          PY
+          ruby -e "require 'yaml'; YAML.safe_load(File.read('.config/gh/config.yml'), aliases: true)"
+
+      - name: Check whitespace
+        run: git diff --check HEAD^
+
+  secrets:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          fetch-depth: 0
+      - uses: gitleaks/gitleaks-action@v3

@@ -1,3 +1,4 @@
+# shellcheck shell=bash
 # ------------------------------------
 # Docker alias and function
 # ------------------------------------
@@ -27,22 +28,25 @@ alias dki="docker run -i -t -P"
 alias dex="docker exec -i -t"
 
 # Stop all containers
+# shellcheck disable=SC2046 # Docker expects each ID as a separate argument.
 dstop() { docker stop $(docker ps -a -q); }
 
 # Remove all containers
+# shellcheck disable=SC2046 # Docker expects each ID as a separate argument.
 drm() { docker rm $(docker ps -a -q); }
 
 # Stop and Remove all containers
 alias drmf='docker stop $(docker ps -a -q) && docker rm $(docker ps -a -q)'
 
 # Remove all images
+# shellcheck disable=SC2046 # Docker expects each ID as a separate argument.
 dri() { docker rmi $(docker images -q); }
 
 # Dockerfile build, e.g., $dbu tcnksm/test 
-dbu() { docker build -t=$1 .; }
+dbu() { docker build -t="$1" .; }
 
 # Show all alias related docker
 dalias() { alias | grep 'docker' | sed "s/^\([^=]*\)=\(.*\)/\1 => \2/"| sed "s/['|\']//g" | sort; }
 
 # Bash into running container
-dbash() { docker exec -it $(docker ps -aqf "name=$1") bash; }
+dbash() { docker exec -it "$(docker ps -aqf "name=$1")" bash; }

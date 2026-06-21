@@ -29,6 +29,12 @@ git pull --ff-only
 Re-running setup refreshes symlinks; updates Homebrew packages, Oh My Zsh, TPM,
 and tmux plugins; and reapplies macOS defaults only when `macos.sh` changes.
 
+Run a non-mutating health check at any time:
+
+```sh
+./setup.sh --check
+```
+
 `setup.sh` will:
 1. Install Xcode CLI tools (if missing)
 2. Install Homebrew, 1Password if missing, and run `brew bundle`

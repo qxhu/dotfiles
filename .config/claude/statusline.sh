@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/usr/bin/env bash
 # Claude Code status line — mirrors shell prompt context (dir + git + model)
 input=$(cat)
 
@@ -24,8 +24,8 @@ if git -C "$cwd" rev-parse --git-dir >/dev/null 2>&1; then
   staged=$(git -C "$cwd" diff --cached --name-only 2>/dev/null | wc -l | tr -d ' ')
   modified=$(git -C "$cwd" diff --name-only 2>/dev/null | wc -l | tr -d ' ')
   untracked=$(git -C "$cwd" ls-files --others --exclude-standard 2>/dev/null | wc -l | tr -d ' ')
-  ahead=$(git -C "$cwd" rev-list @{u}..HEAD 2>/dev/null | wc -l | tr -d ' ')
-  behind=$(git -C "$cwd" rev-list HEAD..@{u} 2>/dev/null | wc -l | tr -d ' ')
+  ahead=$(git -C "$cwd" rev-list '@{u}..HEAD' 2>/dev/null | wc -l | tr -d ' ')
+  behind=$(git -C "$cwd" rev-list 'HEAD..@{u}' 2>/dev/null | wc -l | tr -d ' ')
   [ "$staged" -gt 0 ]    && status_str="$status_str +$staged"
   [ "$modified" -gt 0 ]  && status_str="$status_str !$modified"
   [ "$untracked" -gt 0 ] && status_str="$status_str ?$untracked"

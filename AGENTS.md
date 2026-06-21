@@ -30,6 +30,8 @@ Run `./setup.sh` on a new machine. It installs Homebrew, runs `brew bundle`, and
   conf_python.sh                # Python/pip config (PIP_REQUIRE_VIRTUALENV, gpip)
 Brewfile                        # Declarative package list (brew bundle)
 setup.sh                        # Bootstrap script for new machines
+check.sh                        # Non-mutating machine health audit
+.github/workflows/validate.yml  # Syntax, format, and secret checks
 ```
 
 ## Key Conventions
