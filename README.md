@@ -51,6 +51,7 @@ AGENTS.md                   # Repository guidance for AI coding agents
   git/ignore                # Global gitignore
   git/qxhu                  # Portable qxhu GitHub no-reply identity
   git/qxhu-signing.pub      # Public key used for verified commit signing
+  git/allowed_signers       # Trusted signer for local signature verification
   claude/
     CLAUDE.md               # Global Claude Code instructions
     settings.json           # Claude Code preferences
