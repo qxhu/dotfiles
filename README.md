@@ -31,11 +31,12 @@ and tmux plugins; and reapplies macOS defaults only when `macos.sh` changes.
 
 `setup.sh` will:
 1. Install Xcode CLI tools (if missing)
-2. Install Homebrew and run `brew bundle`
+2. Install Homebrew, 1Password if missing, and run `brew bundle`
 3. Prompt for git identities (per-profile)
 4. Symlink all configs into place
-5. Set Homebrew zsh as default shell
-6. Install tmux plugin manager, uv-managed Python, fzf shell integration
+5. Validate that 1Password exposes the expected SSH keys
+6. Set Homebrew zsh as default shell
+7. Install tmux plugin manager, uv-managed Python, fzf shell integration
 
 ## Layout
 
@@ -94,5 +95,6 @@ mackup restore   # on a new machine
 ## After setup
 
 1. Restart terminal
-2. Authenticate GitHub: `gh auth login`
-3. Run `claude` to authenticate with Anthropic
+2. In 1Password, enable **Settings > Developer > Use the SSH agent** if setup warns that it is unavailable
+3. Authenticate GitHub: `gh auth login`
+4. Run `claude` to authenticate with Anthropic

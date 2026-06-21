@@ -36,6 +36,13 @@ eval "$(/opt/homebrew/bin/brew shellenv 2>/dev/null || /usr/local/bin/brew shell
 info "Updating Homebrew..."
 brew update
 
+# 1Password may already be installed outside Homebrew. Avoid replacing a
+# running, self-updating installation; use the cask only on fresh machines.
+if [ ! -d "/Applications/1Password.app" ]; then
+  info "Installing 1Password..."
+  brew install --cask 1password
+fi
+
 info "Installing and updating packages from Brewfile..."
 brew bundle --file="$DOTFILES/Brewfile"
 
@@ -95,6 +102,22 @@ link "$DOTFILES/.config/git/allowed_signers" "$HOME/.config/git/allowed_signers"
 
 # 1Password SSH agent (public item selectors only; no key material)
 link "$DOTFILES/.config/1Password/ssh/agent.toml" "$HOME/.config/1Password/ssh/agent.toml"
+
+# The Developer setting that enables the agent is intentionally managed by the
+# 1Password app. Validate it here and provide an actionable warning if needed.
+_ONEPASSWORD_AGENT="$HOME/Library/Group Containers/2BUA8C4S2C.com.1password/t/agent.sock"
+if [ ! -S "$_ONEPASSWORD_AGENT" ]; then
+  warn "1Password SSH agent is not running. Enable Settings > Developer > Use the SSH agent."
+elif _ONEPASSWORD_KEYS="$(SSH_AUTH_SOCK="$_ONEPASSWORD_AGENT" ssh-add -L 2>/dev/null)"; then
+  for key_name in qxhu servers; do
+    if ! printf '%s\n' "$_ONEPASSWORD_KEYS" | grep -Eq " ${key_name}$"; then
+      warn "1Password SSH agent is not exposing the '$key_name' key from the devenv vault."
+    fi
+  done
+else
+  warn "1Password SSH agent is unavailable. Unlock 1Password and verify its Developer settings."
+fi
+unset _ONEPASSWORD_AGENT _ONEPASSWORD_KEYS key_name
 
 # GitHub CLI (hosts.yml remains local authentication state)
 link "$DOTFILES/.config/gh/config.yml"      "$HOME/.config/gh/config.yml"
