@@ -20,6 +20,7 @@ Run `./setup.sh` on a new machine. It installs Homebrew, runs `brew bundle`, and
 .config/
   zsh/.zshrc                    # Main zsh config (completions, history, Oh My Zsh, plugins)
   cmux/settings.json            # cmux terminal config
+  gh/config.yml                 # GitHub CLI preferences (auth state is not tracked)
   claude/
     CLAUDE.md                   # Global Claude instructions (synced across machines)
     settings.json               # Claude Code preferences

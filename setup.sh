@@ -85,6 +85,9 @@ info "Creating symlinks..."
 link "$DOTFILES/.config/git/config"        "$HOME/.config/git/config"
 link "$DOTFILES/.config/git/ignore"        "$HOME/.config/git/ignore"
 
+# GitHub CLI (hosts.yml remains local authentication state)
+link "$DOTFILES/.config/gh/config.yml"      "$HOME/.config/gh/config.yml"
+
 # SSH config (keys themselves are never tracked)
 link "$DOTFILES/.ssh/config"               "$HOME/.ssh/config"
 chmod 600 "$HOME/.ssh/config"
