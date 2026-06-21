@@ -5,7 +5,10 @@ eval "$(/opt/homebrew/bin/brew shellenv 2>/dev/null || /usr/local/bin/brew shell
 export XDG_CONFIG_HOME="$HOME/.config"
 export XDG_CACHE_HOME="$HOME/.cache"
 export XDG_DATA_HOME="$HOME/.local/share"
-export XDG_RUNTIME_DIR="/tmp"
+export XDG_RUNTIME_DIR="${TMPDIR:-/tmp}"
+export XDG_RUNTIME_DIR="${XDG_RUNTIME_DIR%/}/xdg-runtime-$UID"
+mkdir -p "$XDG_RUNTIME_DIR"
+chmod 700 "$XDG_RUNTIME_DIR"
 
 # Shell
 export ZDOTDIR="$XDG_CONFIG_HOME/zsh"

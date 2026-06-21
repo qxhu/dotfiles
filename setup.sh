@@ -133,11 +133,22 @@ fi
 
 # ── Oh My Zsh ─────────────────────────────────────────────────────────────────
 OMZ_DIR="${XDG_CONFIG_HOME:-$HOME/.config}/zsh/ohmyzsh"
-if [ ! -d "$OMZ_DIR" ]; then
-  info "Installing oh-my-zsh..."
-  ZSH="$OMZ_DIR" RUNZSH=no CHSH=no sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
-  # Restore symlink that oh-my-zsh installer overwrites
-  ln -sf "$DOTFILES/.config/zsh/.zshrc" "$HOME/.config/zsh/.zshrc"
+OMZ_COMMIT="df34d2b8d575777465aed8ae9b7cd90d63fdcd6e"
+if [ ! -d "$OMZ_DIR/.git" ]; then
+  if [ -e "$OMZ_DIR" ]; then
+    warn "$OMZ_DIR exists but is not a git checkout; move it aside and re-run setup"
+    exit 1
+  fi
+  info "Installing Oh My Zsh..."
+  git clone --no-checkout https://github.com/ohmyzsh/ohmyzsh.git "$OMZ_DIR"
+fi
+if ! git -C "$OMZ_DIR" cat-file -e "${OMZ_COMMIT}^{commit}" 2>/dev/null; then
+  info "Fetching pinned Oh My Zsh revision..."
+  git -C "$OMZ_DIR" fetch --depth=1 origin "$OMZ_COMMIT"
+fi
+if [ "$(git -C "$OMZ_DIR" rev-parse HEAD)" != "$OMZ_COMMIT" ]; then
+  info "Updating Oh My Zsh to pinned revision..."
+  git -C "$OMZ_DIR" checkout --detach "$OMZ_COMMIT"
 fi
 
 # ── Tmux Plugin Manager ───────────────────────────────────────────────────────
@@ -153,21 +164,22 @@ if command -v uv &>/dev/null; then
 fi
 
 # ── macOS defaults ────────────────────────────────────────────────────────────
-# Only run on first setup or when explicitly requested (--apply-macos),
-# since it restarts Finder/Dock which is disruptive on re-runs.
+# Reapply automatically when macos.sh changes. --apply-macos forces a run.
 _MACOS_STAMP="$HOME/.config/.macos_defaults_applied"
-if [ "$SKIP_MACOS" = false ] && { [ "$FORCE_MACOS" = true ] || [ ! -f "$_MACOS_STAMP" ]; }; then
+_MACOS_HASH="$(shasum -a 256 "$DOTFILES/macos.sh" | awk '{print $1}')"
+_APPLIED_MACOS_HASH="$(cat "$_MACOS_STAMP" 2>/dev/null || true)"
+if [ "$SKIP_MACOS" = false ] && { [ "$FORCE_MACOS" = true ] || [ "$_MACOS_HASH" != "$_APPLIED_MACOS_HASH" ]; }; then
   "$DOTFILES/macos.sh"
-  touch "$_MACOS_STAMP"
+  printf '%s\n' "$_MACOS_HASH" > "$_MACOS_STAMP"
 else
-  info "Skipping macOS defaults (already applied — use --apply-macos to re-run)"
+  info "Skipping macOS defaults (unchanged — use --apply-macos to force)"
 fi
 
 echo ""
 success "Done! Next steps:"
 echo "  1. Restart your terminal"
-echo "  2. Authenticate GitHub accounts:"
-echo "     gh auth login   # run twice, once per account (choose HTTPS)"
+echo "  2. Authenticate GitHub:"
+echo "     gh auth login"
 echo "     gh auth setup-git  # configure git credential helper"
 echo "  3. Run 'claude' to authenticate with Anthropic"
 echo "  4. In tmux, press prefix + I to install tmux plugins"

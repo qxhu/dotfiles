@@ -18,6 +18,17 @@ cd ~/projects/dotfiles
 ./setup.sh
 ```
 
+To update an existing machine after this repository changes:
+
+```sh
+cd ~/projects/dotfiles
+git pull --ff-only
+./setup.sh
+```
+
+Re-running setup refreshes symlinks and packages, enforces the pinned Oh My Zsh
+revision, and reapplies macOS defaults only when `macos.sh` has changed.
+
 `setup.sh` will:
 1. Install Xcode CLI tools (if missing)
 2. Install Homebrew and run `brew bundle`
@@ -79,6 +90,6 @@ mackup restore   # on a new machine
 ## After setup
 
 1. Restart terminal
-2. Authenticate GitHub: `gh auth login` (once per account)
+2. Authenticate GitHub: `gh auth login`
 3. Run `claude` to authenticate with Anthropic
 4. In tmux: `prefix + I` to install plugins (`C-f` is the prefix)
