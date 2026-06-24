@@ -94,3 +94,4 @@ setup.sh                    # Bootstrap script
 2. In 1Password, enable **Settings > Developer > Use the SSH agent** if setup warns that it is unavailable
 3. Authenticate GitHub: `gh auth login`
 4. Run `claude` to authenticate with Anthropic
+5. Import Raycast settings (extensions + hotkeys): Raycast → Settings → Advanced → Import, select `.config/raycast/settings.rayconfig`. This is import-only — Raycast can't load it via symlink, so re-export to update.

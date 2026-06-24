@@ -16,3 +16,7 @@
 
 # GitHub CLI authentication state
 .config/gh/hosts.yml
+
+# Raycast — only the curated export in .config/raycast/ is tracked.
+# Ignore stray timestamped exports that land in .config/ (may contain secrets).
+.config/*.rayconfig
