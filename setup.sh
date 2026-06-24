@@ -46,16 +46,11 @@ brew update
 info "Installing and updating packages from Brewfile..."
 brew bundle --file="$DOTFILES/Brewfile"
 
-# ── Git local config (sensitive — not tracked in dotfiles) ────────────────────
+# ── Git identity profiles (per-directory overrides, not tracked) ──────────────
+# The default identity (qxhu / no-reply, signed) lives in the tracked
+# .config/git/config. Only per-directory includeIf profiles that aren't tracked
+# here are prompted for and created locally.
 mkdir -p "$HOME/.config/git"
-
-if [ ! -f "$HOME/.config/git/local" ]; then
-  info "Creating ~/.config/git/local (not tracked in dotfiles)..."
-  read -rp "  Your full name: " git_name
-  read -rp "  Default email (used when no profile matches): " git_email
-  printf '[user]\n\tname = %s\n\temail = %s\n' "$git_name" "$git_email" > "$HOME/.config/git/local"
-  success "  Created ~/.config/git/local"
-fi
 
 # Prompt for any profiles defined in git/config that don't exist yet
 while IFS= read -r profile; do
@@ -97,7 +92,6 @@ info "Creating symlinks..."
 # Git
 link "$DOTFILES/.config/git/config"        "$HOME/.config/git/config"
 link "$DOTFILES/.config/git/ignore"        "$HOME/.config/git/ignore"
-link "$DOTFILES/.config/git/qxhu"          "$HOME/.config/git/qxhu"
 link "$DOTFILES/.config/git/qxhu-signing.pub" "$HOME/.config/git/qxhu-signing.pub"
 link "$DOTFILES/.config/git/allowed_signers" "$HOME/.config/git/allowed_signers"
 

@@ -1,18 +1,22 @@
-# Personal data (name, default email) lives in ~/.config/git/local — not tracked.
-# That file is created by setup.sh on first run.
+# Single identity for every repo: qxhu / GitHub no-reply, signed with the
+# 1Password SSH key. Add an includeIf below if a host ever needs a different
+# email (e.g. a work org that mandates a corporate address).
 [user]
+	name = qxhu
+	email = 67043+qxhu@users.noreply.github.com
+	signingKey = ~/.config/git/qxhu-signing.pub
 	useConfigOnly = true
 
-[include]
-	path = ~/.config/git/local
-
-# qxhu identity for GitHub HTTPS and SSH remotes
-[includeIf "hasconfig:remote.*.url:https://github.com/qxhu/**"]
-	path = ~/.config/git/qxhu
-[includeIf "hasconfig:remote.*.url:git@github.com:qxhu/**"]
-	path = ~/.config/git/qxhu
-[includeIf "hasconfig:remote.*.url:ssh://git@github.com/qxhu/**"]
-	path = ~/.config/git/qxhu
+# Sign all commits and tags with the 1Password SSH key.
+[gpg]
+	format = ssh
+[gpg "ssh"]
+	program = /Applications/1Password.app/Contents/MacOS/op-ssh-sign
+	allowedSignersFile = ~/.config/git/allowed_signers
+[commit]
+	gpgSign = true
+[tag]
+	gpgSign = true
 
 [core]
 	excludesfile = ~/.config/git/ignore

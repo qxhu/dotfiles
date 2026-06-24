@@ -27,7 +27,7 @@ shellcheck <file>   # static analysis (install: brew install shellcheck)
 
 **Claude Code config:** `.config/claude/` is symlinked into `~/.claude/`. The `commands/` subdirectory holds shared slash commands/skills; each file is linked individually so `~/.claude/` can still hold untracked per-machine data.
 
-**Git profiles:** `~/.config/git/config` uses `includeIf` to load per-directory profiles (e.g. `work`). Profile files (e.g. `~/.config/git/work`) are NOT tracked in this repo — they're created interactively by `setup.sh` and hold sensitive email addresses.
+**Git identity:** `~/.config/git/config` (tracked) sets one signed identity for every repo — `qxhu` / GitHub no-reply email, signing all commits and tags via the 1Password SSH key. To use a different email for some repos (e.g. a work org that mandates a corporate address), add an `includeIf "hasconfig:remote.*.url:…"` block pointing to a non-tracked profile file (e.g. `~/.config/git/work`); `setup.sh`'s prompt loop creates any such untracked profile interactively and holds the sensitive email locally.
 
 **Python:** `PIP_REQUIRE_VIRTUALENV=true` is set globally in `.config/conf_python.sh`. Use `gpip`/`gpip3` aliases for intentional global installs.
 
