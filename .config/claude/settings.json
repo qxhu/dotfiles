@@ -12,13 +12,13 @@
       "source": {
         "source": "github",
         "repo": "cloudflare/skills"
-      }
+      },
+      "autoUpdate": true
     }
   },
   "effortLevel": "xhigh",
   "skipDangerousModePermissionPrompt": true,
   "theme": "dark",
   "preferredNotifChannel": "auto",
-  "autoUpdaterStatus": "enabled",
-  "model": "haiku"
+  "autoUpdaterStatus": "enabled"
 }
