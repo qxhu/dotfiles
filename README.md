@@ -87,16 +87,6 @@ setup.sh                    # Bootstrap script
 | zsh-syntax-highlighting | Command coloring before you hit enter |
 | zsh-history-substring-search | `↑`/`↓` searches history by typed prefix |
 | Claude Code | AI coding assistant (installed via brew cask) |
-| mackup | Sync non-CLI app configs |
-
-## Non-tracked app configs
-
-Use `mackup` for GUI app preferences:
-
-```sh
-mackup backup    # save
-mackup restore   # on a new machine
-```
 
 ## After setup
 

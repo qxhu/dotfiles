@@ -33,4 +33,4 @@ shellcheck <file>   # static analysis (install: brew install shellcheck)
 
 **cmux vs tmux:** cmux is for local dev; tmux is kept only for remote/SSH sessions. Tmux prefix is `C-f`.
 
-**Non-CLI app configs:** Use `mackup` (in Brewfile) — not tracked here.
+**GUI app configs:** Add a direct `link` call in `setup.sh` (as done for Zed and cmux). Mackup is not used.

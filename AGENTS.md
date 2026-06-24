@@ -46,4 +46,4 @@ check.sh                        # Non-mutating machine health audit
 
 **Python:** `PIP_REQUIRE_VIRTUALENV=true` globally. Use `gpip`/`gpip3` for global installs.
 
-**Non-CLI apps:** Use `mackup` (included in Brewfile) to sync app configs. Run `mackup backup` to save, `mackup restore` on a new machine.
+**GUI app configs:** Symlink the app's config file directly via a `link` call in `setup.sh` (as done for Zed and cmux). Mackup is not used.

@@ -14,7 +14,6 @@ brew "zsh-autosuggestions"
 brew "zsh-syntax-highlighting"
 brew "zsh-history-substring-search"
 brew "shellcheck"      # shell script validation
-brew "mackup"         # sync non-CLI app configs
 
 # Launcher / menubar
 cask "raycast"
