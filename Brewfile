@@ -15,6 +15,10 @@ brew "zsh-syntax-highlighting"
 brew "zsh-history-substring-search"
 brew "shellcheck"      # shell script validation
 
+# Security / auth
+cask "1password", args: { adopt: true }  # adopt a pre-brew manual install
+cask "1password-cli"  # `op`; integrates with the 1Password desktop app
+
 # Launcher / menubar
 cask "raycast"
 cask "hiddenbar"
@@ -31,3 +35,4 @@ cask "zed"
 # ── AI ────────────────────────────────────────────────────────────────────────
 cask "claude-code@latest"
 cask "codex"
+cask "chatgpt", args: { adopt: true }  # adopt a pre-brew manual install

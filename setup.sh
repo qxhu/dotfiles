@@ -43,17 +43,6 @@ eval "$(/opt/homebrew/bin/brew shellenv 2>/dev/null || /usr/local/bin/brew shell
 info "Updating Homebrew..."
 brew update
 
-# 1Password may already be installed outside Homebrew. Avoid replacing a
-# running, self-updating installation; use the cask only on fresh machines.
-if [ ! -d "/Applications/1Password.app" ]; then
-  info "Installing 1Password..."
-  brew install --cask 1password
-fi
-if [ ! -d "/Applications/ChatGPT.app" ]; then
-  info "Installing ChatGPT..."
-  brew install --cask chatgpt
-fi
-
 info "Installing and updating packages from Brewfile..."
 brew bundle --file="$DOTFILES/Brewfile"
 
