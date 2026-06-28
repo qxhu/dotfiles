@@ -26,31 +26,6 @@ defaults write NSGlobalDomain NSAutomaticSpellingCorrectionEnabled -bool false
 defaults write NSGlobalDomain NSAutomaticQuoteSubstitutionEnabled -bool false
 defaults write NSGlobalDomain NSAutomaticDashSubstitutionEnabled -bool false
 
-# ── Input switching shortcut ───────────────────────────────────────────────────
-# Ctrl+Space = select previous input source (key 60)
-# Ctrl+Option+Space = select next input source (key 61)
-# NOTE: Input sources themselves (Pinyin) must be added manually via
-#       System Settings > Keyboard > Input Sources — HIToolbox is system-managed
-#       and ignores programmatic writes on modern macOS.
-# Uses PlistBuddy to merge individual keys without overwriting other shortcuts.
-_HOTKEYS="$HOME/Library/Preferences/com.apple.symbolichotkeys.plist"
-for key in 60 61; do
-  /usr/libexec/PlistBuddy -c "Delete :AppleSymbolicHotKeys:${key}" "$_HOTKEYS" 2>/dev/null || true
-  /usr/libexec/PlistBuddy -c "Add :AppleSymbolicHotKeys:${key} dict" "$_HOTKEYS"
-  /usr/libexec/PlistBuddy -c "Add :AppleSymbolicHotKeys:${key}:enabled bool true" "$_HOTKEYS"
-  /usr/libexec/PlistBuddy -c "Add :AppleSymbolicHotKeys:${key}:value dict" "$_HOTKEYS"
-  /usr/libexec/PlistBuddy -c "Add :AppleSymbolicHotKeys:${key}:value:type string standard" "$_HOTKEYS"
-  /usr/libexec/PlistBuddy -c "Add :AppleSymbolicHotKeys:${key}:value:parameters array" "$_HOTKEYS"
-  /usr/libexec/PlistBuddy -c "Add :AppleSymbolicHotKeys:${key}:value:parameters:0 integer 32" "$_HOTKEYS"
-  /usr/libexec/PlistBuddy -c "Add :AppleSymbolicHotKeys:${key}:value:parameters:1 integer 49" "$_HOTKEYS"
-done
-# Key 60: Ctrl+Space (modifier = 262144)
-/usr/libexec/PlistBuddy -c "Add :AppleSymbolicHotKeys:60:value:parameters:2 integer 262144" "$_HOTKEYS"
-# Key 61: Ctrl+Option+Space (modifier = 786432)
-/usr/libexec/PlistBuddy -c "Add :AppleSymbolicHotKeys:61:value:parameters:2 integer 786432" "$_HOTKEYS"
-# Apply hotkey changes without requiring logout
-/System/Library/PrivateFrameworks/SystemAdministration.framework/Resources/activateSettings -u
-
 # ── Trackpad ──────────────────────────────────────────────────────────────────
 # Tap to click (covers both built-in and Bluetooth trackpads)
 defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad Clicking -bool true

@@ -18,7 +18,8 @@
   },
   "effortLevel": "xhigh",
   "skipDangerousModePermissionPrompt": true,
-  "theme": "dark",
+  "theme": "auto",
   "preferredNotifChannel": "auto",
-  "autoUpdaterStatus": "enabled"
+  "autoUpdaterStatus": "enabled",
+  "tui": "fullscreen"
 }
